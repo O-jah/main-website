@@ -1,0 +1,40 @@
+[
+  {
+    "slotId": "story-helen",
+    "title": "Peace Cannot Be Built on Enforced Silence",
+    "img": "assets/img/story-helen.jpg",
+    "visibleText": "The world celebrated when the Cessation of Hostilities Agreement was signed in November 2022. For the international community, the silence of the guns meant peace had finally arrived in Tigray. But for seventeen-year-old Helen* and her family outside Mekelle, the agreement did not bring safety. Months later, armed men entered Helen’s home. Her mother walked her for miles to a local health facility, where a clinician documented her injuries — an act of quiet resistance that became one of the clinical records OJAH analyzed.\n\nHelen is now navigating a long road of recovery, in a village that remains tense and where transitional justice still feels far away. Her story is part of a striking pattern: ninety-five percent of the sexual violence cases involving minors recorded by medical human rights defenders in Tigray occurred after the peace agreement was signed.\n\nWhen the men finally left, Helen’s mother did not take her to a neighbor or a village elder; she walked her for miles to a local healthcare facility. There, a local clinician, operating with scarce supplies but immense determination, quietly documented Helen’s injuries.\n\nThe clinician filled out a standard medical chart, meticulously noting the physical trauma, the severe psychological distress, and the displacement of the family. That chart was not just medical paperwork; it was an act of resistance. It became one of the clinical records discretely analyzed by OJAH.\n\nToday, Helen is navigating the long, grueling road of psychological and physical recovery. Her village is still tense, and the promised transitional justice feels far away. But her story, and the data backing it up, shatters the illusion of a peaceful post-conflict Tigray. Helen’s survival demands that the international community look past the signatures on a treaty and see the ongoing atrocities for what they are. Peace cannot be built on enforced silence. ",
+    "findings": [
+      {
+        "label": "Widespread conflict-related sexual violence",
+        "text": "OJAH and Physicians for Human Rights documented that sexual violence remained a systemic weapon used to terrorize civilian populations during military sweeps, with a high proportion of healthcare workers in Tigray reporting having treated survivors of CRSV."
+      },
+      {
+        "label": "Systemic isolation and deprivation of care",
+        "text": "Rolling States of Emergency, internet blackouts and regional blockades isolated communities from oversight, making it dangerous for survivors to travel for care and restricting clinics from receiving essential medical and psychological supplies."
+      }
+    ],
+    "footnote": "*Name changed to protect the survivor’s identity and safety.",
+    "published": true,
+    "featured": false
+  },
+  {
+    "slotId": "story-ruth",
+    "title": "A Life Cut Short",
+    "img": "assets/img/story-ruth.jpg",
+    "visibleText": "The sharp buzz of a drone overhead was a sound that two-year-old Ruth* had never known a world without in her village within the Amhara region. Under the rolling State of Emergency, the sky above her home was no longer a source of rain or sunlight, but of unpredictable, mechanized terror.\n\nIt happened on a quiet Sunday morning while Ruth was playing with her doll just outside her family’s doorstep. The strike was instantaneous, shattering the village center and spraying jagged metal shrapnel through the air. Little Ruth survived the deafening initial blast, but her tiny body was severely lacerated by flying debris. Bleeding heavily and crying out in agonizing pain, her panicked parents scooped her into their arms and ran desperately toward the local clinic just two kilometers away.\n\nBut when they arrived, breathless and terrified, they were met by a bleak landscape of hollowed-out concrete and shattered glass. The clinic was gone, completely destroyed by previous artillery shelling and systematic military raids that had swept the area weeks prior. The vital medical supplies had been looted, the basic infrastructure ruined, and the local nursing staff forced to flee for their own safety. There was no clean blood for a transfusion, no sterile gauze left to wrap her wounds, and no clinician to stabilize the child.\n\nRuth took her final breath in her mother’s arms on the dirt path just outside the clinic’s ruined entrance, her brief life slipping away in the very place built to protect and save it. Today, only a black-and-white photograph, hanging in a wooden frame on a rusty nail in her parents’ whitewashed living room, bears witness to her life cut short by a joystick.",
+    "findings": [
+      {
+        "label": "Escalating strikes affecting civilians",
+        "text": "OJAH’s cross-regional monitoring documented a sharp escalation of strikes targeting civilian-dense centers across Amhara during the Fano insurgency, frequently affecting the most vulnerable, including young children."
+      },
+      {
+        "label": "Collapse of healthcare infrastructure",
+        "text": "Field research found that the destruction of health clinics followed a systemic pattern rather than incidental damage — clinics targeted, shelled, or stripped of resources, cutting off wounded civilians from emergency care."
+      }
+    ],
+    "footnote": "*Name changed to protect the identity and dignity of the victim’s family.",
+    "published": true,
+    "featured": false
+  }
+]

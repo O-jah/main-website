@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /assets/js/
+Disallow: /.tmp_docx/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://o-jah.org/sitemap.xml

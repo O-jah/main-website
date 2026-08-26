@@ -1,0 +1,187 @@
+# =============================================================================
+# Decap CMS configuration — OJAH (https://o-jah.org)
+# Admin UI served from: https://admin.o-jah.org
+# Auth: Netlify Identity + Git Gateway (free Netlify tier, invite-only)
+# Content storage: ONLY the three JSON files under content/ (no database,
+# no additional files). build.js reads these and regenerates dist/.
+#
+# Roles (Netlify Identity app_metadata.roles):
+#   content-admin  -> full CRUD over Reports, Stories, Homepage Featured
+#   superadmin     -> everything in content-admin PLUS Netlify Identity user
+#                     management (invite/remove users, assign roles)
+#
+# 3 seats, invite-only (open registration disabled in Netlify Identity):
+#   Superadmin (1) -> role: superadmin
+#   Admin      (2) -> role: content-admin  (equal content permissions)
+# =============================================================================
+
+backend:
+  name: git-gateway
+  branch: main          # match the repository's default branch
+
+# Uploads are saved under assets/uploads and referenced from the site root.
+# (Existing media already lives in assets/img and assets/reports; editors may
+# also type those existing paths directly.)
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+site_url: https://o-jah.org
+display_url: https://admin.o-jah.org
+
+collections:
+  # ---------------------------------------------------------------------------
+  # Reports -> content/reports.json (array of report records)
+  # ---------------------------------------------------------------------------
+  - name: reports
+    label: Reports
+    files:
+      - name: reports
+        label: Reports
+        file: content/reports.json
+        fields:
+          - name: id
+            label: ID (slug)
+            widget: string
+            required: true
+            hint: "Stable identifier used in links — do not change once published."
+          - name: num
+            label: Number
+            widget: number
+            required: true
+          - name: title
+            label: Title
+            widget: string
+            required: true
+          - name: year
+            label: Year
+            widget: string
+            required: true
+          - name: type
+            label: Type
+            widget: select
+            required: true
+            options: ["Investigation Report", "Monitoring Report", "CRSV"]
+          - name: region
+            label: Region
+            widget: string
+          - name: summary
+            label: Summary
+            widget: text
+          - name: detail
+            label: Detail
+            widget: text
+          - name: thumb
+            label: Thumbnail
+            widget: image
+            hint: "Upload a thumbnail image."
+          - name: pdf
+            label: PDF
+            widget: file
+            hint: "Upload the PDF. Leave empty for restricted reports."
+          - name: fileName
+            label: Download file name
+            widget: string
+            hint: "e.g. echoes-of-violence.pdf"
+          - name: restricted
+            label: Restricted access
+            widget: boolean
+            default: false
+            hint: "Set true for request-access reports; then leave PDF + file name empty."
+          - name: published
+            label: Published
+            widget: boolean
+            default: true
+          - name: featured
+            label: Featured
+            widget: boolean
+            default: false
+            hint: "Only one report should be featured — this drives the homepage block."
+
+  # ---------------------------------------------------------------------------
+  # Stories -> content/stories.json (array of story records)
+  # ---------------------------------------------------------------------------
+  - name: stories
+    label: Stories
+    files:
+      - name: stories
+        label: Stories
+        file: content/stories.json
+        fields:
+          - name: slotId
+            label: Slot ID (slug)
+            widget: string
+            required: true
+            hint: "Stable identifier, e.g. story-helen."
+          - name: title
+            label: Title
+            widget: string
+            required: true
+          - name: img
+            label: Story image
+            widget: image
+            hint: "Upload the story image (with consent)."
+          - name: visibleText
+            label: Body
+            widget: text
+            required: true
+            hint: "Story text; blank lines become paragraph breaks."
+          - name: findings
+            label: Findings
+            widget: list
+            required: false
+            summary: "{{fields.label}}"
+            fields:
+              - name: label
+                label: Label
+                widget: string
+              - name: text
+                label: Text
+                widget: text
+          - name: footnote
+            label: Footnote
+            widget: string
+          - name: published
+            label: Published
+            widget: boolean
+            default: true
+          - name: featured
+            label: Featured
+            widget: boolean
+            default: false
+
+  # ---------------------------------------------------------------------------
+  # Homepage Featured -> content/featured.json (single object)
+  # ---------------------------------------------------------------------------
+  - name: featured
+    label: Homepage Featured
+    files:
+      - name: featured
+        label: Homepage Featured
+        file: content/featured.json
+        fields:
+          - name: id
+            label: Report ID (slug)
+            widget: string
+            required: true
+            hint: "The report this block links to, e.g. stolen-broken-destroyed."
+          - name: meta
+            label: Meta line
+            widget: string
+            hint: "e.g. August 2026 · Research Brief · by OJAH and PHR"
+          - name: title
+            label: Title
+            widget: string
+            required: true
+          - name: summary
+            label: Summary
+            widget: text
+          - name: image
+            label: Cover image
+            widget: image
+          - name: imageAlt
+            label: Image alt text
+            widget: string
+          - name: link
+            label: Link URL
+            widget: string
+            default: "reports.html"

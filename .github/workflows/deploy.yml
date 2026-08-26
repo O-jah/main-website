@@ -1,0 +1,70 @@
+name: Build and Deploy to Hetzner
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# Serialize deploys so two pushes never sync over each other.
+concurrency:
+  group: deploy-hetzner
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Any failure here exits non-zero; the sync step below is gated on
+      # `if: success()`, so it is skipped when the build fails.
+      - name: Build static site
+        run: |
+          set -euo pipefail
+          node build.js
+          test -f dist/index.html
+          test -f dist/reports.html
+          test -f dist/stories.html
+
+      - name: Sync dist/ to Hetzner (rsync over SSH, SFTP fallback)
+        if: success()
+        env:
+          HETZNER_HOST: ${{ secrets.HETZNER_HOST }}
+          HETZNER_USER: ${{ secrets.HETZNER_USER }}
+          HETZNER_SSH_KEY: ${{ secrets.HETZNER_SSH_KEY }}
+          # The existing Hetzner folder that serves the public site.
+          # Adjust this to the real path on the server.
+          REMOTE_DIR: /var/www/o-jah
+        run: |
+          set -euo pipefail
+
+          # --- SSH setup: install the private key from the repository secret ---
+          mkdir -p "$HOME/.ssh"
+          chmod 700 "$HOME/.ssh"
+          printf '%s\n' "$HETZNER_SSH_KEY" | tr -d '\r' > "$HOME/.ssh/deploy_key"
+          chmod 600 "$HOME/.ssh/deploy_key"
+          ssh-keyscan -H "$HETZNER_HOST" >> "$HOME/.ssh/known_hosts" 2>/dev/null || true
+
+          SSH_OPTS="-i $HOME/.ssh/deploy_key -o StrictHostKeyChecking=accept-new -o BatchMode=yes"
+          TARGET="$HETZNER_USER@$HETZNER_HOST:$REMOTE_DIR"
+
+          # --- Primary: rsync over SSH ---
+          # NOTE: --delete is intentionally NOT passed, so this workflow never
+          # removes files on Hetzner. If a destructive sync is ever required,
+          # it must be added here as an explicitly documented `--delete` flag
+          # (only after confirming REMOTE_DIR points at the intended folder).
+          if rsync -avz -e "ssh $SSH_OPTS" dist/ "$TARGET/"; then
+            echo "Deployed via rsync."
+          else
+            echo "rsync failed - falling back to SFTP (scp)."
+            # --- Fallback: SFTP upload (scp uses the SFTP protocol) ---
+            scp -r $SSH_OPTS dist/* "$TARGET/"
+          fi

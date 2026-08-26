@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OJAH — Justice & Accountability in the Horn of Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" type="image/png" href="assets/img/ojah-logo.png">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>window.__resources = {};</script>
+<script src="assets/js/react.min.js"></script>
+<script src="assets/js/react-dom.min.js"></script>
+<script src="assets/js/dc-runtime.js"></script>
+<script src="assets/js/image-slot.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="--ink:#0B1D3A; --blue:#2E6FAE; --horizon:#88B6E2; --mist:#D6E4F2; --cloud:#F2F6FB; --paper:#FFFFFF; --red:#C8102E; --orange:#BF5700; --f-body:'Poppins',sans-serif; --f-editorial:'Lora',serif; font-family:var(--f-body); color:var(--ink); background:var(--paper); overflow-x:hidden;">
+
+<div data-nav-open="{{ mobileNavOpen }}" style="position:fixed;top:0;left:0;right:0;z-index:100;background:{{ navBg }};backdrop-filter:blur(10px);box-shadow:{{ navShadow }};transition:box-shadow 0.3s ease, background 0.3s ease;">
+  <div data-nav-inner="true" style="max-width:1360px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+    <a href="index.html" aria-label="OJAH Home" style="display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0;text-decoration:none;">
+      <img src="assets/img/ojah-logo.png" alt="OJAH" style="height:32px;display:block;">
+    </a>
+    <button data-nav-toggle="true" sc-camel-on-click="{{ toggleMobileNav }}" aria-label="Menu" style="background:none;border:1px solid var(--mist);border-radius:6px;padding:8px 10px;align-items:center;justify-content:center;flex-shrink:0;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B1D3A" stroke-width="2" stroke-linecap="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>
+    </button>
+    <div data-nav-links="true" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+      <a data-nav-link="true" href="index.html" style="{{ linkStyle_home }} text-decoration:none;">Home</a>
+      <a data-nav-link="true" href="about.html" style="{{ linkStyle_about }} text-decoration:none;">About</a>
+      <a data-nav-link="true" href="what-we-do.html" style="{{ linkStyle_whatwedo }} text-decoration:none;">What We Do</a>
+      <a data-nav-link="true" href="how-we-work.html" style="{{ linkStyle_howwework }} text-decoration:none;">How We Work</a>
+      <a data-nav-link="true" href="reports.html" style="{{ linkStyle_reports }} text-decoration:none;">Reports</a>
+      <a data-nav-link="true" href="stories.html" style="{{ linkStyle_stories }} text-decoration:none;">Stories</a>
+      <a data-nav-link="true" href="contact.html" style="{{ linkStyle_contact }} text-decoration:none;">Contact</a>
+    </div>
+    <a data-nav-cta="true" href="reports.html" style="background:var(--red);color:#fff;border:none;border-radius:5px;padding:11px 18px;font-size:13px;font-weight:600;white-space:nowrap;flex-shrink:0;text-decoration:none;display:inline-block;">Read Our Reports</a>
+  </div>
+</div>
+
+<div data-screen-label="Reports">
+  <div style="position:relative;padding:170px 40px 90px;background:var(--ink);color:#fff;overflow:hidden;">
+    <div style="position:absolute;inset:0;background-image:url(&quot;assets/img/page-texture.jpg&quot;);background-size:cover;background-position:center;opacity:0.08;"></div>
+    <img src="assets/img/horn-of-africa-map.png" style="position:absolute;right:-100px;top:-60px;width:360px;opacity:0.12;">
+    <div ref="{{ observeReveal }}" data-reveal="true" style="position:relative;max-width:960px;margin:0 auto;">
+      <div style="font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:20px;">Reports &amp; Publications</div>
+      <h1 data-page-title="true" style="font-size:46px;font-weight:700;line-height:1.2;margin:0 0 20px;">Evidence for justice, truth and accountability.</h1>
+      <p style="font-size:17px;line-height:1.75;opacity:0.8;margin:0;max-width:700px;">OJAH's reports and publications present evidence-based analysis of human rights violations, conflict dynamics, survivor experiences and accountability pathways in the Horn of Africa.</p>
+    </div>
+  </div>
+
+  <div style="max-width:1160px;margin:0 auto;padding:50px 40px 30px;display:flex;gap:10px;flex-wrap:wrap;">
+    <sc-for list="{{ reportFilters }}" as="f" hint-placeholder-count="6">
+      <button sc-camel-on-click="{{ f.select }}" style="background:{{ f.bg }};color:{{ f.color }};border:1px solid {{ f.border }};border-radius:20px;padding:9px 18px;font-size:13px;font-weight:600;">{{ f.label }}</button>
+    </sc-for>
+  </div>
+
+  <div data-report-grid="true" style="max-width:1160px;margin:0 auto;padding:20px 40px 28px;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <sc-for list="{{ visibleReports }}" as="r" hint-placeholder-count="8">
+      <div data-report-card="true" class="{{ r.cardClass }}" data-reveal="true" ref="{{ observeReveal }}" style="border:1px solid var(--mist);border-radius:14px;overflow:hidden;background:var(--paper);min-height:236px;">
+        <div style="padding:24px;display:flex;flex-direction:column;height:100%;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;">
+            <span style="background:var(--cloud);color:var(--blue);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:5px 9px;border-radius:5px;">{{ r.type }}</span>
+            <span style="font-size:12px;opacity:0.5;">{{ r.year }}</span>
+          </div>
+          <div style="font-weight:700;font-size:15px;line-height:1.42;margin-bottom:10px;">{{ r.title }}</div>
+          <div style="font-size:12px;opacity:0.7;line-height:1.6;margin-bottom:8px;">{{ r.summary }} <span style="color:var(--red);font-weight:700;cursor:pointer;white-space:nowrap;" sc-camel-on-click="{{ r.open }}">Read more</span></div>
+          <div style="font-size:11px;opacity:0.55;margin-bottom:16px;">{{ r.region }}</div>
+          <div style="display:flex;gap:18px;font-size:11px;font-weight:700;margin-top:auto;flex-wrap:wrap;">
+            <sc-if value="{{ r.showDownload }}" hint-placeholder-val="{{ true }}">
+              <a href="{{ r.pdf }}" download="{{ r.fileName }}" style="color:var(--red);text-decoration:none;">Download PDF</a>
+            </sc-if>
+            <sc-if value="{{ r.showCountdown }}" hint-placeholder-val="{{ false }}">
+              <span style="color:var(--orange);">Available in {{ r.countdownText }}</span>
+            </sc-if>
+            <sc-if value="{{ r.restricted }}" hint-placeholder-val="{{ false }}">
+              <span style="cursor:pointer;color:var(--blue);" sc-camel-on-click="{{ r.open }}">Request Access</span>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="max-width:1160px;margin:0 auto;padding:0 40px 100px;text-align:center;">
+    <div style="font-size:12px;opacity:0.55;margin-bottom:18px;">{{ reportCountLabel }}</div>
+    <sc-if value="{{ hasMoreReports }}" hint-placeholder-val="{{ true }}">
+      <button sc-camel-on-click="{{ loadMoreReports }}" style="background:var(--ink);color:#fff;border:none;border-radius:6px;padding:14px 28px;font-size:13px;font-weight:700;">Load More Reports</button>
+    </sc-if>
+  </div>
+
+  <div style="background:var(--cloud);padding:90px 40px;">
+    <div style="max-width:1160px;margin:0 auto;">
+      <div data-reveal="true" ref="{{ observeReveal }}" style="opacity:0;">
+        <div style="font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:32px;">Publication Categories</div>
+        <div data-cards-4="true" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+          <div><div style="font-weight:700;font-size:15px;margin-bottom:8px;">Investigation Reports</div><div style="font-size:13px;opacity:0.75;line-height:1.6;">In-depth reports documenting patterns of grave violations, survivor experiences, evidence findings and accountability implications.</div></div>
+          <div><div style="font-weight:700;font-size:15px;margin-bottom:8px;">Policy Briefs</div><div style="font-size:13px;opacity:0.75;line-height:1.6;">Concise analysis for policymakers, diplomats, civil society partners and institutional stakeholders.</div></div>
+          <div><div style="font-weight:700;font-size:15px;margin-bottom:8px;">Strategic Submissions</div><div style="font-size:13px;opacity:0.75;line-height:1.6;">Formal submissions to accountability processes, human rights mechanisms and justice-related bodies.</div></div>
+          <div><div style="font-weight:700;font-size:15px;margin-bottom:8px;">Situation Updates</div><div style="font-size:13px;opacity:0.75;line-height:1.6;">Shorter updates highlighting emerging risks, trends, incidents and urgent accountability concerns.</div></div>
+        </div>
+        <p style="font-size:13px;opacity:0.65;line-height:1.7;margin-top:40px;max-width:800px;">Some publications or supporting materials may require restricted access to protect survivors, witnesses, staff, partners, or sensitive evidence. Where full publication is not appropriate, use the Request Access option.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<sc-if value="{{ hasActiveReport }}" hint-placeholder-val="{{ false }}">
+  <div sc-camel-on-click="{{ closeReport }}" style="position:fixed;inset:0;z-index:320;background:rgba(11,29,58,0.66);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:24px;">
+    <div class="modal-panel" sc-camel-on-click="{{ stopEvent }}" style="width:min(1020px,100%);max-height:88vh;overflow:auto;background:rgba(255,255,255,0.9);backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,0.72);border-radius:20px;box-shadow:0 30px 90px rgba(0,0,0,0.36);position:relative;">
+      <button sc-camel-on-click="{{ closeReport }}" aria-label="Close report details" style="position:absolute;right:18px;top:18px;z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid var(--mist);background:rgba(255,255,255,0.76);color:var(--ink);font-size:22px;line-height:1;">×</button>
+      <div data-modal-grid="true" style="display:grid;grid-template-columns:1fr;">
+        <div style="padding:46px 52px;">
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:18px;">
+            <span style="background:var(--cloud);color:var(--blue);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:6px 10px;border-radius:5px;">{{ activeReport.type }}</span>
+            <span style="font-size:12px;opacity:0.55;">{{ activeReport.year }} · {{ activeReport.region }}</span>
+          </div>
+          <h2 style="font-size:30px;line-height:1.25;font-weight:700;margin:0 0 18px;">{{ activeReport.title }}</h2>
+          <p style="font-size:15px;line-height:1.8;opacity:0.82;margin:0 0 16px;">{{ activeReport.summary }}</p>
+          <p style="font-size:14px;line-height:1.85;opacity:0.76;margin:0 0 26px;">{{ activeReport.detail }}</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px;">
+            <sc-if value="{{ activeReport.showDownload }}" hint-placeholder-val="{{ true }}">
+              <a href="{{ activeReport.pdf }}" download="{{ activeReport.fileName }}" style="background:var(--red);color:#fff;border-radius:6px;padding:13px 20px;font-size:13px;font-weight:700;text-decoration:none;">Download PDF</a>
+            </sc-if>
+            <sc-if value="{{ activeReport.showCountdown }}" hint-placeholder-val="{{ false }}">
+              <span style="border:1px solid var(--orange);border-radius:6px;padding:13px 18px;font-size:12px;font-weight:700;color:var(--orange);">Available in {{ activeReport.countdownText }}</span>
+            </sc-if>
+            <sc-if value="{{ activeReport.restricted }}" hint-placeholder-val="{{ false }}">
+              <span style="border:1px solid var(--mist);border-radius:6px;padding:13px 18px;font-size:12px;font-weight:700;color:var(--blue);">This report is only available upon request. Please complete and submit the request form below to access the report.</span>
+            </sc-if>
+          </div>
+          <sc-if value="{{ activeReport.restricted }}" hint-placeholder-val="{{ false }}">
+            <div style="border-top:1px solid var(--mist);padding-top:26px;">
+            <div style="font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:14px;">Request Access</div>
+            <p style="font-size:12px;line-height:1.65;opacity:0.65;margin:0 0 18px;"></p>
+            <form data-two-col="true" sc-camel-on-submit="{{ submitReportRequest }}" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none;">
+              <input name="name" required="required" placeholder="Full name" style="padding:12px 14px;border-radius:6px;border:1px solid var(--mist);font-size:13px;background:rgba(255,255,255,0.8);">
+              <input name="email" type="email" required="required" placeholder="Email address" style="padding:12px 14px;border-radius:6px;border:1px solid var(--mist);font-size:13px;background:rgba(255,255,255,0.8);">
+              <input name="organization" placeholder="Organization" style="padding:12px 14px;border-radius:6px;border:1px solid var(--mist);font-size:13px;background:rgba(255,255,255,0.8);">
+              <sc-raw-select name="purpose" style="padding:12px 14px;border-radius:6px;border:1px solid var(--mist);font-size:13px;background:rgba(255,255,255,0.8);">
+                <option>Research or academic use</option>
+                <option>Legal or accountability process</option>
+                <option>Policy or diplomatic use</option>
+                <option>Media enquiry</option>
+                <option>Other</option>
+              </sc-raw-select>
+              <textarea name="message" required="required" placeholder="Please briefly tell us about yourself or organization to help us know more about your work and process your request" style="grid-column:1 / -1;min-height:92px;padding:12px 14px;border-radius:6px;border:1px solid var(--mist);font-size:13px;background:rgba(255,255,255,0.8);resize:vertical;"></textarea>
+              <div style="grid-column:1 / -1;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+                <button type="submit" style="background:var(--ink);color:#fff;border:none;border-radius:6px;padding:13px 20px;font-size:13px;font-weight:700;">Submit Request</button>
+                <span style="font-size:11px;line-height:1.5;opacity:0.58;">{{ reportRequestStatus }}</span>
+              </div>
+            </form>
+          </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<div style="position:relative;background:var(--ink);color:#fff;padding:90px 40px 32px;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:url(&quot;assets/img/page-texture.jpg&quot;);background-size:cover;background-position:center;opacity:0.1;"></div>
+  <div style="position:absolute;left:0;top:0;right:0;height:5px;background:linear-gradient(90deg, var(--red), var(--orange), var(--blue));"></div>
+  <img src="assets/img/horn-of-africa-map.png" style="position:absolute;left:-140px;bottom:-140px;width:420px;opacity:0.08;filter:grayscale(1) brightness(2);">
+  <div style="position:relative;max-width:1360px;margin:0 auto;">
+    <div data-footer-grid="true" style="display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:32px;margin-bottom:56px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.1);">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <img src="assets/img/ojah-logo.png" style="height:26px;filter:brightness(0) invert(1);">
+        </div>
+        <p style="font-size:13px;opacity:0.6;line-height:1.7;max-width:260px;margin:0 0 18px;">Organisation for Justice &amp; Accountability in the Horn of Africa.</p>
+        <div style="font-size:12px;opacity:0.55;line-height:1.8;">1612 K St NW, STE 400<br>Washington DC, USA<br>communications@o-jah.org</div>
+      </div>
+      <div><div style="font-size:12px;font-weight:700;margin-bottom:16px;opacity:0.9;">About OJAH</div><div style="display:flex;flex-direction:column;gap:10px;font-size:13px;opacity:0.65;"><a href="about.html" style="cursor:pointer;color:inherit;text-decoration:none;">About</a><a href="about.html" style="cursor:pointer;color:inherit;text-decoration:none;">Vision &amp; Mission</a><a href="about.html" style="cursor:pointer;color:inherit;text-decoration:none;">Leadership</a></div></div>
+      <div><div style="font-size:12px;font-weight:700;margin-bottom:16px;opacity:0.9;">Our Work</div><div style="display:flex;flex-direction:column;gap:10px;font-size:13px;opacity:0.65;"><a href="what-we-do.html" style="cursor:pointer;color:inherit;text-decoration:none;">What We Do</a><a href="how-we-work.html" style="cursor:pointer;color:inherit;text-decoration:none;">How We Work</a><a href="how-we-work.html" style="cursor:pointer;color:inherit;text-decoration:none;">Where We Work &amp; Impact</a></div></div>
+      <div><div style="font-size:12px;font-weight:700;margin-bottom:16px;opacity:0.9;">Resources</div><div style="display:flex;flex-direction:column;gap:10px;font-size:13px;opacity:0.65;"><a href="reports.html" style="cursor:pointer;color:inherit;text-decoration:none;">Reports &amp; Publications</a><a href="stories.html" style="cursor:pointer;color:inherit;text-decoration:none;">Stories &amp; Updates</a></div></div>
+      <div><div style="font-size:12px;font-weight:700;margin-bottom:16px;opacity:0.9;">Engage</div><div style="display:flex;flex-direction:column;gap:10px;font-size:13px;opacity:0.65;"><a href="index.html#home-partners" style="cursor:pointer;color:inherit;text-decoration:none;">Partners</a><a href="contact.html" style="cursor:pointer;color:inherit;text-decoration:none;">Contact</a></div></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;opacity:0.5;">
+      <span>© 2026 Organisation for Justice &amp; Accountability in the Horn of Africa</span>
+      <span>Confidentiality Notice · Privacy Notice · Terms of Use · Ethical Storytelling Commitment</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script="">
+class Component extends DCLogic {
+  state = {
+    page: 'reports',
+    reportFilter: 'All',
+    reportsShown: 8,
+    activeLeaderId: null,
+    activeReportId: null,
+    reportRequestStatus: '',
+    mobileNavOpen: false,
+    expandedStory: null,
+    scrolled: false,
+    now: Date.now(),
+  };
+
+  componentDidMount() {
+    this._onScroll = () => {
+      const scrolled = window.scrollY > 40;
+      if (scrolled !== this.state.scrolled) this.setState({ scrolled });
+      this.checkReveals();
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    window.addEventListener('resize', this._onScroll, { passive: true });
+    this.checkReveals();
+    this._revealTimer = setInterval(() => this.checkReveals(), 400);
+    this._countdownTimer = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    this._onKeyDown = (event) => {
+      if (event.key === 'Escape' && (this.state.activeLeaderId || this.state.activeReportId)) this.closeModals();
+    };
+    window.addEventListener('keydown', this._onKeyDown);
+    this._onPartnerLinkClick = (event) => {
+      const link = event.target && event.target.closest ? event.target.closest('a[href*="#home-partners"]') : null;
+      if (!link || this.state.page !== 'home') return;
+      event.preventDefault();
+      this.goHomePartners();
+    };
+    document.addEventListener('click', this._onPartnerLinkClick);
+    if (window.location.hash === '#home-partners') {
+      setTimeout(() => this.goHomePartners(), 120);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._onScroll);
+    if (this._revealTimer) clearInterval(this._revealTimer);
+    if (this._countdownTimer) clearInterval(this._countdownTimer);
+    window.removeEventListener('keydown', this._onKeyDown);
+    document.removeEventListener('click', this._onPartnerLinkClick);
+    document.body.style.overflow = '';
+  }
+
+  checkReveals = () => {
+    const nodes = document.querySelectorAll('[data-reveal]:not(.is-in)');
+    const vh = window.innerHeight || 800;
+    nodes.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.94 && r.bottom > 0) el.classList.add('is-in');
+    });
+  };
+
+  observeReveal = () => {};
+
+  stopEvent = (event) => {
+    if (event && event.stopPropagation) event.stopPropagation();
+  };
+
+  heroMouseMove = (event) => {
+    const host = event.currentTarget;
+    if (!host || !host.getBoundingClientRect) return;
+    const rect = host.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+    host.querySelectorAll('[data-hero-ring]').forEach((ring) => {
+      const depth = Number(ring.getAttribute('data-hero-ring') || 1);
+      const tx = x * (12 + depth * 13);
+      const ty = y * (8 + depth * 10);
+      const rot = x * (depth - 2) * 2.4;
+      ring.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotate(${rot}deg)`;
+    });
+  };
+
+  heroMouseLeave = (event) => {
+    if (!event.currentTarget) return;
+    event.currentTarget.querySelectorAll('[data-hero-ring]').forEach((ring) => {
+      ring.style.transform = 'translate3d(0, 0, 0) rotate(0deg)';
+    });
+  };
+
+  toggleMobileNav = () => {
+    this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen }));
+  };
+
+  goHomePartners = () => {
+    this.setState({ page: 'reports', mobileNavOpen: false });
+    setTimeout(() => {
+      const target = document.getElementById('home-partners');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      this.checkReveals();
+    }, 80);
+  };
+
+  openLeader = (slotId) => {
+    this.setState({ activeLeaderId: slotId, activeReportId: null, reportRequestStatus: '' });
+    document.body.style.overflow = 'hidden';
+  };
+
+  openReport = (reportId) => {
+    this.setState({ activeReportId: reportId, activeLeaderId: null, reportRequestStatus: '' });
+    document.body.style.overflow = 'hidden';
+  };
+
+  closeModals = () => {
+    this.setState({ activeLeaderId: null, activeReportId: null, reportRequestStatus: '' });
+    document.body.style.overflow = '';
+  };
+
+  loadMoreReports = () => {
+    this.setState((s) => ({ reportsShown: s.reportsShown + 8 }));
+    setTimeout(() => this.checkReveals(), 60);
+  };
+
+  submitReportRequest = (event) => {
+    if (event && event.preventDefault) event.preventDefault();
+    const report = (this._reports || []).find((r) => r.id === this.state.activeReportId);
+    if (!report || !event.currentTarget) return;
+    const form = event.currentTarget;
+    if (form.elements.botcheck && form.elements.botcheck.checked) return;
+    const payload = {
+      access_key: 'c0c7d7af-cf4d-451b-8640-665aa94af174',
+      subject: `Access request: ${report.title}`,
+      from_name: 'OJAH website request form',
+      report: report.title,
+      name: form.elements.name.value.trim(),
+      email: form.elements.email.value.trim(),
+      organization: form.elements.organization.value.trim() || 'Not provided',
+      purpose: form.elements.purpose.value,
+      message: form.elements.message.value.trim(),
+    };
+    this.setState({ reportRequestStatus: 'Sending your request…' });
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.success) {
+          form.reset();
+          this.setState({ reportRequestStatus: 'Your request has been sent. We will get back to you by email.' });
+        } else {
+          this.setState({ reportRequestStatus: 'The request could not be sent. Please try again or email communications@o-jah.org.' });
+        }
+      })
+      .catch(() => {
+        this.setState({ reportRequestStatus: 'The request could not be sent. Please check your connection and try again.' });
+      });
+  };
+
+  icon(name) {
+    const I = {
+      monitoring: '<path d="M6 24c4-8 10-12 18-12s14 4 18 12c-4 8-10 12-18 12s-14-4-18-12z"/><circle cx="24" cy="24" r="7"/><circle cx="24" cy="24" r="2" fill="currentColor"/>',
+      investigation: '<rect x="9" y="6" width="20" height="26" rx="2"/><line x1="14" y1="14" x2="24" y2="14"/><line x1="14" y1="20" x2="22" y2="20"/><circle cx="30" cy="30" r="7"/><line x1="35" y1="35" x2="41" y2="41"/>',
+      justiceactors: '<line x1="24" y1="8" x2="24" y2="34"/><path d="M24 8l-5 5h10z"/><line x1="10" y1="16" x2="38" y2="16"/><path d="M4 16l6 11h-12z"/><path d="M44 16l-6 11h12z"/><line x1="14" y1="40" x2="34" y2="40"/>',
+      advocacy: '<path d="M6 20v6l6 2V18z"/><path d="M12 18l20-9v28l-20-9"/><path d="M18 30l2 8"/><path d="M32 15c3 2 3 15 0 17"/>',
+      survivorsupport: '<path d="M24 40s-16-9-16-21a9 9 0 0116-6 9 9 0 0116 6c0 12-16 21-16 21z"/>',
+      memorialization: '<path d="M24 6c6 8 8 12 8 17a8 8 0 01-16 0c0-5 2-9 8-17z"/><line x1="16" y1="40" x2="32" y2="40"/>',
+      capacitybuilding: '<circle cx="16" cy="14" r="5"/><path d="M6 34c0-6 4-10 10-10s10 4 10 10"/><circle cx="34" cy="18" r="4"/><path d="M27 34c1-4 4-7 7-7s6 3 7 7"/>',
+    };
+    const color = (name === 'advocacy' || name === 'memorialization') ? '#C8102E' : '#2E6FAE';
+    return { __html: `<svg viewBox="0 0 48 48" width="24" height="24" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${I[name] || ''}</svg>` };
+  }
+
+  navLink(active) {
+    return `font-size:13px;font-weight:600;cursor:pointer;color:${active ? '#C8102E' : '#0B1D3A'};opacity:${active ? '1' : '0.75'};`;
+  }
+
+  go(page) {
+    const files = {
+      home: 'index.html', about: 'about.html', whatwedo: 'what-we-do.html',
+      howwework: 'how-we-work.html', reports: 'reports.html', stories: 'stories.html',
+      contact: 'contact.html',
+    };
+    window.location.href = files[page] || 'index.html';
+  }
+
+  renderVals() {
+    const page = this.state.page;
+
+    const values = [
+      { title: 'Integrity and Truthfulness', desc: 'We adhere to the highest standards of accuracy, honesty, and evidence-based practice.' },
+      { title: 'Respect for Human Dignity', desc: 'We place the rights, safety and agency of survivors and affected communities at the centre of our work.' },
+      { title: 'Non-Sectarian Commitment', desc: 'We maintain autonomy from political, ethnic, religious, and armed factions, guided by human rights and accountability.' },
+      { title: 'Accountability and Responsibility', desc: 'We hold ourselves to the same standards of transparency and ethical conduct we expect from institutions of power.' },
+      { title: 'Confidentiality and Discretion', desc: 'We protect sensitive information, survivor identities, witness safety, and the security of staff and partners.' },
+      { title: 'Solidarity and Mutual Respect', desc: 'We work alongside survivors, communities and justice partners with humility, trust and shared purpose.' },
+      { title: 'Commitment to Non-Violence', desc: 'We advance justice through lawful, ethical, evidence-based, and non-violent means.' },
+    ];
+
+    const leaders = [
+      {
+        slotId: 'leader-silas', name: 'Silas Muriungi Mukangu', role: 'Board Chair',
+        previewBio: 'An accomplished humanitarian, Pan-Africanist and public health professional with a distinguished global career advancing human dignity.',
+        restBio: 'He brings extensive expertise directing complex healthcare programs, leading trauma-informed training, and addressing the needs of vulnerable populations in fragile contexts. He served as Primary Health Care Delegate for the ICRC across South Sudan, Afghanistan, Mali, Ethiopia, Syria and the DRC, overseeing large-scale healthcare programs and leading multidisciplinary teams. As HIV Workplace Coordinator for Africa and Asia, he supervised regional healthcare programs across 13 countries, collaborating with ministries of health and international NGOs.',
+      },
+      {
+        slotId: 'leader-rapp', name: 'H.E. Ambassador Stephen J. Rapp', role: 'Board Member',
+        previewBio: 'Senior Fellow at the US Holocaust Memorial Museum\u2019s Center for Prevention of Genocide and Oxford\u2019s Center for Ethics, Law, and Armed Conflict.',
+        restBio: 'From 2009 to 2015, he was Ambassador-at-Large heading the Office of Global Criminal Justice at the US State Department, coordinating support to international criminal tribunals. He was Prosecutor of the Special Court for Sierra Leone (2007\u20132009), leading the prosecution of former Liberian President Charles Taylor and achieving the first convictions in history for sexual slavery and forced marriage as crimes against humanity. He previously served as Senior Trial Attorney and Chief of Prosecutions at the ICTR.',
+      },
+      {
+        slotId: 'leader-mehari', name: 'Prof. Dr. Mehari Taddele Maru', role: 'Board Member',
+        previewBio: 'More than 23 years of teaching and research experience in geopolitics, peace and security, law and governance, migration and humanitarian affairs.',
+        restBio: 'He has worked professionally within the United Nations, the African Union and IGAD. He is currently Academic Coordinator of the Young African Leaders Programme at the School of Transnational Governance, and Part-time Professor at the Migration Policy Centre, European University Institute. He previously served as Legal Expert at the African Union Commission and Chief Strategist and Lead Migration Expert for IGAD and the AU High-level Advisory Group. He holds a PhD from JL Giessen University, an MPA from Harvard, an MSc from Oxford, and an LLB from Addis Ababa University.',
+      },
+    ];
+    const leadership = leaders.map((l) => ({
+      ...l,
+      modalSlotId: l.slotId + '-modal',
+      open: () => this.openLeader(l.slotId),
+    }));
+    const activeLeader = leadership.find((l) => l.slotId === this.state.activeLeaderId) || leadership[0];
+
+    const programmeAreas = [
+      { title: 'Monitoring, Investigation, Documentation & Evidence Preservation', desc: 'We monitor at-risk regions, document violations, conduct credible investigation, and preserve evidence using survivor-centered and trauma-informed approaches. This creates the evidence foundation for accountability, advocacy, truth-telling, and policy action.', iconHtml: this.icon('investigation') },
+      { title: 'Assistance to Justice Actors', desc: 'We provide credible data and analysis to international legal bodies, tribunals, and human rights mechanisms.', iconHtml: this.icon('justiceactors') },
+      { title: 'Strategic Advocacy and Policy Engagement', desc: 'We translate evidence and analysis into policy influence, diplomatic engagement, public accountability and institutional reform, conducted responsibly with attention to survivor safety.', iconHtml: this.icon('advocacy') },
+      { title: 'Survivor Support and Trauma-Informed Care', desc: 'Our accountability work is grounded in the principle that documentation must never extract testimony without care. Survivors are treated as rights holders with agency, dignity, and control.', iconHtml: this.icon('survivorsupport') },
+      { title: 'Capacity Building', desc: 'We provide technical support for local advocates, community leaders, and local CSOs in safe documentation and human rights advocacy.', iconHtml: this.icon('capacitybuilding') },
+      { title: 'Truth and Memorialisation', desc: 'Justice is not only legal — it also includes truth, memory, and acknowledgement. Memorialization helps protect communities from denial, erasure, and future cycles of violence.', iconHtml: this.icon('memorialization') },
+    ];
+
+    const partnerBenefitIcons = { evidence: this.icon('investigation'), legitimacy: this.icon('justiceactors'), care: this.icon('survivorsupport') };
+
+    const homeProgrammeTeaser = [
+      { title: 'Documentation & Evidence', desc: 'Survivor-centered investigation and secure evidence preservation.', iconHtml: this.icon('investigation') },
+      { title: 'Strategic Advocacy', desc: 'Turning verified evidence into policy influence and institutional reform.', iconHtml: this.icon('advocacy') },
+      { title: 'Survivor Support', desc: 'Trauma-informed care rooted in dignity, consent and agency.', iconHtml: this.icon('survivorsupport') },
+      { title: 'Truth & Memorialisation', desc: 'Preserving memory and historical record against denial and erasure.', iconHtml: this.icon('memorialization') },
+    ];
+
+    const pipelineSteps = [
+      { num: '01', title: 'Identify and Verify', tagline: 'Turning early warning into trusted information.', desc: 'OJAH monitors conflict-affected and at-risk areas to identify emerging patterns of violations, assess risks and verify information through ethical, survivor-centred methods.' },
+      { num: '02', title: 'Investigate, Document and Preserve', tagline: 'Building credible evidence for justice.', desc: 'OJAH documents survivor testimony and other relevant evidence, investigates credible allegations and securely preserves material so it can support accountability, truth-telling, advocacy and research.' },
+      { num: '03', title: 'Support and Strengthen', tagline: 'Putting survivors, communities and partners at the centre.', desc: 'OJAH engages survivors and affected communities with dignity, consent and care, while supporting local advocates, civil society partners and justice actors with credible analysis and technical assistance.' },
+      { num: '04', title: 'Advocate and Advance Accountability', tagline: 'Turning evidence into action.', desc: 'OJAH translates verified evidence and survivor-centred analysis into reports, submissions, policy engagement and accountability strategies that support justice, institutional reform and prevention.' },
+    ];
+
+    const principles = ['Survivor dignity and agency', 'Do-no-harm and risk mitigation', 'Informed consent and confidentiality', 'Evidence integrity and secure preservation', 'Independence and impartiality', 'African-led and community-rooted practice', 'Accountability to affected communities'];
+
+    const allReports = [
+          {
+                "id": "echoes-of-violence",
+                "num": 1,
+                "title": "Echoes of Violence: Documenting International Human Rights Crimes in Ethiopia, an Executive Summary of Ten Incidents",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Northern Ethiopia",
+                "summary": "Case-based investigation of 10 selected incidents combining survivor testimony, satellite imagery and open-source intelligence, assessed against international law.",
+                "detail": "Through an in-depth, case-based investigation, OJAH examined 10 purposively selected incidents illustrating different patterns of alleged international human rights and humanitarian law violations arising from the conflicts in northern Ethiopia. The investigation combined survivor and witness interviews, field-based documentation, OJAH’s existing evidence archive, satellite imagery, and other open-source intelligence, with evidence triangulated to establish key facts such as location, timing, victim profiles, and circumstances of each incident. Investigators received specialized training in international human rights law, advanced interviewing, and evidence documentation, while legal experts assessed the findings against relevant international legal frameworks. Rigorous chain-of-custody, informed-consent, anonymization, encryption, and restricted-access procedures were applied to protect survivors and preserve evidentiary integrity. The study generated detailed case-based evidence intended to support further investigation, legal accountability, advocacy, and broader efforts to address impunity and prevent future atrocities in Ethiopia.",
+                "thumb": "assets/reports/echoes-of-violence-thumbnail.png",
+                "pdf": "assets/reports/echoes-of-violence.pdf",
+                "fileName": "echoes-of-violence.pdf"
+          },
+          {
+                "id": "case-mariam-shewito",
+                "num": 2,
+                "title": "Documenting Atrocities and Gross Violations of Human Rights in Ethiopia: The Case of Mariam Shewito",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "This investigative report by the OJAH documents the massacre in Mariam Shewito village, Tigray, Ethiopia, during the 2022 conflict.",
+                "detail": "Drawing on survivor testimonies, digital evidence, and open-source intelligence, it details how Eritrean Defense Forces systematically targeted civilians-men, women, and children-resulting in 106 deaths, widespread destruction of homes, looting, and denial of burial rights. The investigation reveals these acts as deliberate, coordinated, and retaliatory, constituting grave violations of international human rights and humanitarian law, including war crimes and crimes against humanity. The report underscores the urgent need for accountability and justice for victims, highlighting the broader pattern of atrocities in the Tigray conflict",
+                "thumb": "assets/reports/case-mariam-shewito-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "case-mahbere-dego",
+                "num": 3,
+                "title": "Documenting Atrocities and Gross Violations of Human Rights in Ethiopia: The Case of Mahbere-Dego",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "This investigative report by the OJAH  documents the Mahbere Dego massacre, a grave atrocity committed in January 2021 during the conflict in Northern Ethiopia.",
+                "detail": "Drawing on survivor testimonies, satellite imagery, and open-source intelligence, the investigation reveals that Ethiopian National Defense Forces systematically targeted and executed civilians, primarily young men, in the village of Mahibere Dego. The killings were filmed and later verified by international media and human rights organizations, highlighting deliberate acts of murder, torture, and denial of burial rights. The report concludes that these actions constitute Crimes Against Humanity and War Crimes under international law, underscoring the urgent need for justice and accountability for the victims and their families",
+                "thumb": "assets/reports/case-mahbere-dego-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "case-mekelle-kindergarten",
+                "num": 4,
+                "title": "Documenting Atrocities and Gross Violations of Human Rights in Ethiopia: The Case of Mekelle Kindergarten",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "This investigative report by the OJAH  documents the Mekelle Kindergarten airstrike of August 26, 2022, in Ethiopia’s Tigray region, detailing the deliberate targeting of civilian infrastructure and the devastating impact on children and families. ",
+                "detail": "Drawing on survivor testimonies, digital evidence, and legal analysis, the investigation reveals that the Ethiopian Air Force’s attack killed and injured dozens of civilians, including young children, and destroyed homes, schools, and businesses. The report concludes that these acts constitute war crimes and crimes against humanity under international law, highlighting the urgent need for independent accountability and justice for victims",
+                "thumb": "assets/reports/case-mekelle-kindergarten-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "case-maryam-dengelat",
+                "num": 5,
+                "title": "Documenting Atrocities and Gross Violations of Human Rights in Ethiopia: The Case of Maryam Dengelat",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "This report by the Organization for Justice and Accountability in the Horn of Africa (OJAH) documents the mass atrocities committed in Maryam Dengelat, Tigray, Ethiopia, during the conflict that erupted in November 2020. ",
+                "detail": "Drawing on survivor testimonies, field investigations, and open-source evidence, the report details the systematic massacre of over 150 civilians including women, children, and the elderly-by Eritrean forces over three days, alongside widespread looting and destruction. The findings highlight grave violations of international law, including crimes against humanity and war crimes, and underscore the urgent need for independent accountability and justice for the victims and their families",
+                "thumb": "assets/reports/case-maryam-dengelat-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "case-togoga-airstrike",
+                "num": 6,
+                "title": "Documenting Atrocities and Gross Violations of Human Rights in Ethiopia: The Case of Togoga Air Strike",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "The investigative report documents the June 2021 airstrike on Togoga's marketplace in Tigray, Ethiopia, where the Ethiopian Air Force killed 64 civilians and injured 184, including children and the elderly.",
+                "detail": "Drawing on survivor testimonies, medical records, and open-source evidence, the investigation reveals deliberate targeting of civilians, denial of medical aid, and destruction of property-acts identified as crimes against humanity and war crimes under international law. The report calls for urgent accountability and justice for the victims, highlighting the broader pattern of atrocities during the conflict",
+                "thumb": "assets/reports/case-togoga-airstrike-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "case-adi-gedena",
+                "num": 7,
+                "title": "Documenting Atrocities and Gross Violations of Human Rights in Ethiopia: The Case of Adi-Gedena",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "This investigative report by the OJAH  documents the mass atrocities and gross violations of human rights committed in Adi Gedena, Tigray, Ethiopia, during the conflict from October 14-17, 2022. ",
+                "detail": "Drawing on survivor testimonies, field investigations, and legal analysis, the report details systematic violence-including indiscriminate shelling, targeted killings of civilians (especially the elderly), torture, looting, and destruction of property-perpetrated primarily by Eritrean Defense Forces. The findings highlight the urgent need for independent accountability, humanitarian relief, and international action to address the ongoing crisis and ensure justice for victims",
+                "thumb": "assets/reports/case-adi-gedena-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "case-dedebit-drone-strike",
+                "num": 8,
+                "title": "Documenting Atrocities and Gross Violations of Human Rights in Ethiopia: The Case of Dedebit Drone Strike",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "This investigative report by the OJAH  documents the Dedebit drone strike of January 2022, in which the Ethiopian Airforce targeted an elementary school sheltering internally displaced persons in Dedebit, Tigray, resulting in the deaths of 57 civilians and injuries to over 100 more",
+                "detail": "Drawing on survivor testimonies, medical records, and open-source intelligence, the investigation finds no evidence of military presence at the site and concludes that the attack was a deliberate and systematic assault on civilians, constituting crimes against humanity and war crimes under international law. The report highlights the urgent need for accountability and justice for the victims, emphasizing the broader context of ongoing conflict, impunity, and human rights violations in northern Ethiopia",
+                "thumb": "assets/reports/case-dedebit-drone-strike-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "case-bora-vicinities",
+                "num": 9,
+                "title": "Documenting Atrocities and Gross Violations of Human Rights in Ethiopia: The Case of Bora and Vicinities",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "This investigative report by the OJAH, documents grave human rights violations and atrocities committed in Bora and surrounding areas of northern Ethiopia between December 2020 and March 2021. ",
+                "detail": "Through survivor interviews, field investigations, and analysis of visual and documentary evidence, the report details systematic acts of mass killings, torture, sexual violence, destruction of property, and forced displacement perpetrated primarily by the Ethiopian National Defense Forces (ENDF) and Eritrean forces. The findings highlight widespread crimes against humanity and war crimes, including acts that may constitute genocide, and underscore the urgent need for independent accountability and justice for the victims",
+                "thumb": "assets/reports/case-bora-vicinities-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "case-mierab-abaya-prison",
+                "num": 10,
+                "title": "Documenting Atrocities and Gross Violations of Human Rights in Ethiopia: The Case of Mierab-Abaya Prison Camp",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "The report by the Organization for Justice and Accountability in the Horn of Africa (OJAH) documents the atrocities and gross violations of human rights committed at the Mierab Abaya prison camp in Southern Ethiopia during the recent conflict.",
+                "detail": "Through survivor interviews, field investigations, and extensive evidence-including photos, medical records, and satellite imagery-the report reveals systematic mass arrests, ethnic-based persecution, torture, denial of health services, and extrajudicial killings of Tigrayan detainees by Ethiopian National Defense Force (ENDF) personnel and local collaborators. The findings detail how these acts constitute crimes against humanity and war crimes under international law, underscoring the urgent need for independent accountability and justice for the victims",
+                "thumb": "assets/reports/case-mierab-abaya-prison-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "case-edaga-berhe",
+                "num": 11,
+                "title": "Documenting Atrocities and Gross Violations of Human Rights in Ethiopia: The Case of Edaga-Berhe",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "Documents mass atrocities in Edaga Berhe and nearby Tigray villages, February 3–5, 2021, including the deliberate execution of at least 75 male civilians by ENDF units.",
+                "detail": "This OJAH report documents mass atrocities and gross human rights violations in Edaga Berhe and nearby Tigray villages from February 3–5, 2021. It draws on survivor and witness interviews, documentary evidence, open-source intelligence, and field investigations. The report finds that at least 75 male civilians, mainly farmers and students, were deliberately executed by ENDF units, with evidence linking senior officers to the massacres. It frames the violations as war crimes, crimes against humanity, and potential genocide, underscoring the need for independent accountability and survivor-centered documentation.",
+                "thumb": "assets/reports/case-edaga-berhe-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "atrocities-tigray",
+                "num": 12,
+                "title": "Atrocities in Ethiopia: Documenting Mass Killings, Mass Detentions, and Drone Warfare Against Civilians in Tigray",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "Investigation of emblematic Tigray incidents, November 2020–November 2022, including the Abala and Goda Bottle and Glass Factory killings and drone attacks on civilians.",
+                "detail": "Focusing on emblematic episodes from the Tigray conflict, OJAH investigated alleged mass atrocities committed against civilians between November 2020 and November 2022. The study examined incidents involving mass killings, mass detention, forced displacement and population transfer, conflict-related sexual violence, and the use of drone warfare, including the Abala and Goda Bottle and Glass Factory killings and a broader pattern of reported drone attacks affecting civilian populations. Drawing on survivor and witness testimony, field documentation, open-source intelligence, satellite imagery, and other corroborating evidence, OJAH sought to reconstruct individual incidents and identify broader patterns of harm and potential violations of international law. The investigation documented evidence potentially relevant to war crimes and crimes against humanity and highlighted major outstanding evidentiary needs, including access to suspected mass-grave sites and additional forensic investigation. The study was designed to preserve evidence, support survivors, inform independent investigations, and strengthen national and international justice and accountability efforts.",
+                "thumb": "assets/reports/atrocities-tigray-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "human-rights-tigray",
+                "num": 13,
+                "title": "Human Rights Violations in Tigray Region, Ethiopia: An Investigative Report",
+                "year": "2025",
+                "type": "Investigation Report",
+                "region": "Tigray",
+                "summary": "Comprehensive investigation across Abala, Goda, Samre, Seharti, Korem, May-Tsebri and Mekelle, identifying potential war crimes and crimes against humanity.",
+                "detail": "This comprehensive investigative report examines alleged grave human rights and international humanitarian law violations committed against civilians in Tigray, primarily between November 2020 and the November 2022 peace agreement. The investigation examined incidents across locations including Abala, Goda, Samre, Seharti, Korem, May-Tsebri, and Mekelle, using field investigations, survivor and witness testimonies, visual and documentary evidence, and systematic source triangulation. The study documented patterns of mass and extrajudicial killings, forced displacement and arbitrary detention, widespread destruction of civilian property and infrastructure, conflict-related sexual and gender-based violence, and drone strikes resulting in civilian casualties. OJAH also analyzed the evidence against relevant international legal standards, identifying potential war crimes, crimes against humanity, and, in some incidents, indicators warranting further investigation of possible genocidal intent. The report was designed to preserve evidence, clarify patterns of perpetration and responsibility, support survivor-centered justice, and inform independent investigations and national and international accountability efforts.",
+                "thumb": "assets/reports/human-rights-tigray-thumbnail.png",
+                "restricted": true
+          },
+          {
+                "id": "leap-of-insight",
+                "num": 14,
+                "title": "Leap of Insight: Confronting Impunity in Ethiopia",
+                "year": "2025",
+                "type": "Monitoring Report",
+                "region": "Amhara, Tigray",
+                "summary": "First phase of OJAH’s monitoring initiative with OSF support, documenting extrajudicial killings, airstrikes and detention in Amhara and Tigray, January–June 2025.",
+                "detail": "As the first phase of a broader human rights monitoring initiative, Leap of Insight examined conflict-related violations in Ethiopia’s Amhara and Tigray regions between January and June 2025, with technical and financial support from the Open Society Foundations (OSF). The study used a combination of human intelligence, open-source documentation, and systematic media monitoring, supported by a multi-layered verification process, to identify and analyze patterns of alleged human rights abuses in high-risk areas. The monitoring documented persistent violations, including extrajudicial killings, airstrikes affecting civilians, arbitrary detention, sexual violence, and repression of human rights defenders, with women, children, older people, and other vulnerable groups disproportionately affected. The study also assessed these violations within the broader context of Ethiopia’s justice, reconciliation, and transitional justice initiatives, highlighting continuing accountability gaps and the persistence of impunity. The pilot demonstrated the value of real-time, independently verified monitoring in generating evidence for advocacy, victim-centered accountability efforts, and engagement with national and international human rights mechanisms.",
+                "thumb": "assets/reports/leap-of-insight-thumbnail.jpg",
+                "pdf": "assets/reports/leap-of-insight.pdf",
+                "fileName": "leap-of-insight.pdf"
+          },
+          {
+                "id": "tracking-atrocities-q3-2025",
+                "num": 15,
+                "title": "Tracking Atrocities: Ongoing Human Rights Violations Amid Conflict in Ethiopia",
+                "year": "2025",
+                "type": "Monitoring Report",
+                "region": "Amhara, Oromia, Tigray, Afar",
+                "summary": "39 verified incidents across four high-risk regions during July–September 2025, with unlawful killings the most frequently recorded violation.",
+                "detail": "Building on the Leap of Insight pilot, OJAH expanded its continuous human rights monitoring from Amhara and Tigray to four high-risk regions, Amhara, Oromia, Tigray, and Afar, during July to September 2025. Using trained local documenters, human intelligence, open-source documentation, and systematic media monitoring, all subjected to a rigorous multi-layered verification process, OJAH documented 39 new incidents of alleged human rights violations during the three-month period. The monitoring identified unlawful killings as the most frequently recorded violation and found that civilians were affected in the large majority of documented incidents. The study also strengthened its methodology by revising data-collection tools and integrating international-crime indicators, while applying a strict “do no harm” approach to protect survivors, witnesses, and sources. The initiative provides timely, independently verified evidence on evolving patterns of violations and their geographic spread, supporting advocacy, further investigation, accountability efforts, and engagement with national and international human rights mechanisms.",
+                "thumb": "assets/reports/tracking-atrocities-q3-2025-thumbnail.jpg",
+                "pdf": "assets/reports/tracking-atrocities-q3-2025.pdf",
+                "fileName": "tracking-atrocities-q3-2025.pdf"
+          },
+          {
+                "id": "civilian-vulnerability-2026",
+                "num": 16,
+                "title": "Civilian Vulnerability and Systemic Human Rights Violations: Human Rights Monitoring Report in Six High Risk Regions in Ethiopia",
+                "year": "2026",
+                "type": "Monitoring Report",
+                "region": "Amhara, Oromia, Tigray, Somali, Afar, Gambella",
+                "summary": "102 unique verified incidents across six high-risk regions in Q1 2026, including lethal force, humanitarian access constraints and attacks on civilian institutions.",
+                "detail": "During the first quarter of 2026, OJAH broadened its human rights monitoring system to six high-risk regions of Ethiopia: Amhara, Oromia, Tigray, Somali, Afar, and Gambella. Through its established monitoring and verification system, OJAH documented 102 unique, verified incidents, providing evidence of persistent and geographically widespread threats to civilian protection. The analysis identified frequent use of lethal force, including artillery and drone strikes, as well as alleged failures by security actors to respond to early warnings, restrictions on humanitarian assistance, and attacks affecting farmers, laborers, health workers, educators, and other community members. The monitoring also documented the consequences of humanitarian access constraints for internally displaced populations. By generating a systematically verified evidentiary record across multiple conflict-affected settings, the study supports ongoing advocacy, further investigation, civilian-protection efforts, and national and international accountability processes.",
+                "thumb": "assets/reports/civilian-vulnerability-2026-thumbnail.jpg",
+                "pdf": "assets/reports/civilian-vulnerability-2026.pdf",
+                "fileName": "civilian-vulnerability-2026.pdf"
+          },
+          {
+                "id": "tracking-atrocities-q4-2025",
+                "num": 17,
+                "title": "Tracking Atrocities: The Hardening Phase from Tactical Procrastination to a Culture of Lethality",
+                "year": "2026",
+                "type": "Monitoring Report",
+                "region": "Amhara, Oromia, Tigray, Afar",
+                "summary": "39 new incidents verified through a strengthened three-tier protocol in October–December 2025, showing a marked increase in lethal violence against civilians.",
+                "detail": "The October–December 2025 monitoring cycle represented a further strengthening of OJAH’s continuous documentation of human rights violations across Amhara, Oromia, Tigray, and Afar. Building on earlier monitoring phases, the study documented and verified 39 new incidents using a strengthened three-tier verification protocol combining survivor and witness accounts, digital and open-source forensic analysis, and legal review against international crime indicators. The findings showed a marked increase in lethal violence and continued harm to civilians, including attacks affecting health workers, teachers, administrators, and other individuals who play critical roles in sustaining community institutions and resilience. The monitoring also documented alleged abuses by both state and non-state armed actors, as well as cases in which security forces were reportedly present but failed to intervene. Supported by rigorous chain-of-custody, information-security, informed-consent, and “do no harm” procedures, the study generated systematically verified evidence intended to support further investigation, legal accountability, civilian-protection advocacy, and engagement with international human rights and justice mechanisms.",
+                "thumb": "assets/reports/tracking-atrocities-q4-2025-thumbnail.jpg",
+                "restricted": true
+          },
+          {
+                "id": "stolen-broken-destroyed",
+                "num": 19,
+                "title": "Stolen, Broken, Destroyed: How Impunity Has Fueled Ongoing Attacks on Health Care in Ethiopia",
+                "year": "2026",
+                "type": "CRSV",
+                "region": "Tigray, Amhara, Afar, Oromia",
+                "summary": "In collaboration with Physicians for Human Rights (PHR), OJAH undertook a mixed-methods investigation into attacks on health care and the broader effects of armed conflict on Ethiopia's health system between July and October 2024 across Tigray, Amhara, Afar, and Oromia.",
+                "detail": " The study combined 602 structured surveys of health care workers with 40 key informant interviews and four focus group discussions, enabling triangulation of the scale and patterns of attacks with the lived experiences of health professionals. Findings documented widespread attacks on ambulances and health facilities, looting and destruction of medical supplies and infrastructure, armed occupation of facilities, and direct threats and violence against health workers, alongside significant psychological, economic, and service-delivery consequences. OJAH subsequently complemented the study through continuous incident monitoring using its network of local human rights documenters and open-source investigations. The research generated evidence on the systematic vulnerability of health care during conflict and was designed to support protection of health workers and facilities, independent investigation, health-system recovery, and national and international justice and accountability efforts.",
+                "thumb": "assets/reports/stolen-broken-destroyed-thumbnail.png",
+                "pdf": "assets/reports/stolen-broken-destroyed.pdf",
+                "fileName": "stolen-broken-destroyed.pdf"
+          },
+          {
+                "id": "never-give-birth",
+                "num": 20,
+                "title": "\"You Will Never Be Able to Give Birth\": Conflict-Related Sexual and Reproductive Violence in Ethiopia",
+                "year": "2025",
+                "type": "CRSV",
+                "region": "Tigray, Amhara, Afar",
+                "summary": "A multidisciplinary study with PHR examining sexual and reproductive violence and attacks on health care, November 2020–October 2024.",
+                "detail": "A multidisciplinary collaboration between OJAH and Physicians for Human Rights (PHR) examined conflict-related sexual and reproductive violence and associated attacks on health care in Ethiopia between November 2020 and October 2024. The study assessed patterns of violations initially documented in Tigray and their continuation and spread to the Amhara and Afar regions, with particular attention to the consequences of limited justice and accountability. Evidence was triangulated from surveys of more than 600 health care workers who had supported survivors, a review of over 500 medical records, 40 key informant interviews, and four focus group discussions with health workers, humanitarian actors, and community leaders. The findings documented widespread and systematic sexual and reproductive violence, its severe and enduring impacts on survivors and communities, and continuing barriers to accountability, generating evidence to support further investigation, survivor-centered responses, advocacy, and national and international justice and accountability processes.",
+                "thumb": "assets/reports/never-give-birth-thumbnail.png",
+                "pdf": "assets/reports/never-give-birth.pdf",
+                "fileName": "never-give-birth.pdf"
+          },
+          {
+                "id": "broken-promises",
+                "num": 21,
+                "title": "Broken Promises: Conflict-Related Sexual Violence Before and After the Cessation of Hostilities Agreement in Tigray, Ethiopia",
+                "year": "2023",
+                "type": "CRSV",
+                "region": "Tigray",
+                "summary": "Review of 305 medical records documenting conflict-related sexual violence before and after the November 2022 Cessation of Hostilities Agreement.",
+                "detail": "Drawing on medical records from multiple health facilities in Tigray, OJAH and Physicians for Human Rights (PHR) investigated the patterns, characteristics, and health consequences of conflict-related sexual violence occurring between November 2020 and June 2023. A multidisciplinary medical and public health research team reviewed 305 randomly selected medical records, documenting survivors ranging from eight to 69 years of age. The study found widespread and severe sexual violence, frequently involving multiple perpetrators, weapons, captivity, and other forms of physical violence, with survivors predominantly identifying military or paramilitary actors as perpetrators. The analysis also documented substantial physical, reproductive, and mental health consequences, including injuries, unintended pregnancies, HIV infection, depression, and post-traumatic stress, alongside considerable delays in accessing care. Importantly, the study found that conflict-related sexual violence continued after the November 2022 Cessation of Hostilities Agreement, underscoring persistent protection, survivor-support, investigation, and accountability needs.",
+                "thumb": "assets/reports/broken-promises-en-thumbnail.png",
+                "pdf": "assets/reports/broken-promises.pdf",
+                "fileName": "broken-promises.pdf"
+          },
+          {
+                "id": "broken-promises-tigrinya",
+                "num": 24,
+                "title": "ዝተዓፀፈ ቃል፡- ምስ ኲናት ዝተተሓሓዘ ፆታዊ ዓመፅ ቅድምን ድሕርን “ስምምዕ ምቁራፅ ጎንፂ” ኣብ ትግራይ ኢትዮጵያ",
+                "year": "2023",
+                "type": "CRSV",
+                "region": "Tigray",
+                "summary": "መጠነ ሰፊሕ ዝኮነ ፆታዊ ዓመፅ ቀንዲ መግለፂ አብ ትግራይ፣ ዝነበረ ኲናት እዩ ኔሩ ይብል እዚ መፅናዕቲ።",
+                "detail": "ጎንፂ ዘስዓቦ ፆታዊ ዓመፅI ከም ቀንዲ ባእታን ዋና መግለፅን ናይቲ ጎንፂ ምንባሩ ዝገልፁ ፀብፃባት ኣብ ክልቲኡ ማለትዉን ቅድሚን ድሕሪን ኣብ ወርሒ ሕዳር 2013 ኣብ ሞንጎ መንግስቲ ኢትዮጵያን ህወሓትን ዝተገበረ ምፍራም ስምምዕ ምቁራፅ ተፃብኦታት ኔሮም እዮም። 1-3 ክኢላታት መፅናዕቲ ኣብ ኢትዮጵያ ምስ ዝርከቡ መዳርግቶም ብምኳን ኣብ ዘካየድዎ መፅናዕቲ፡ እቲ ጎንፂ ካብ ዝጀመረሉ እዋን (ሕዳር 2013) ክሳብ ሰነ 2015፡ ዕጡቃት ሓይልታት ኣረሜናውን ሰፊሕን ተግባራት ፆታዊ መጥቃዕቲ ከምዝፈፀሙን እዞም ተግባራት ድሕሪ ምፍራም ዉዕሊ ስምምዕ እዉን እንተኮነ ከምዘይተቋረፁን የመላክት። እዚ ጉጅለ መፅናዕቲ ሕክምናን ሰብኣዊ መሰላትን፡ ኣብ ትግራይ ኢትዮጵያ ካብ ዝርከባ ትካላት ጥዕና፣ ብዘይ መደብ ዝተመረፁ 305 ናይ ግዳያት ፆታዊ ዓመፅ መዛግብቲ ሕክምና ገምጊሙ እዩ። ቀንዲ ዕላማ እዚ ዳህሳስ፣ ኣብ ልዕሊ ንፁሃን ደቂ ኣነስትዮ ትግራይ ኣብ መንጎ ሕዳር 2013 ክሳብ ሰነ 2015 ዓ.ም ዝተፈፀመ ፆታዊ ዓመፅ ምድህሳ እዩ። ካብቶም ዝተዳህሰሱ 305 ናይ ሕክምና መዛግብቲ ኣብቶም 304 ኣብ ልዕሊ ካብ ሸሞንተ እስካብ 69 ዝዕድሜኦም ኣካላት፡ ምስ ጎንፂ ዝተተሓሓዘ ኣዝዩ መሰከፊ ዝኮነ ፆታዊ መጥቃዕቲ ዘመላኽቱ ኔሮም።",
+                "thumb": "assets/reports/broken-promises-thumbnail.png",
+                "pdf": "assets/reports/broken-promises-tigrinya.pdf",
+                "fileName": "broken-promises-tigrinya.pdf"
+          },
+          {
+                "id": "broken-promises-amharic",
+                "num": 25,
+                "title": "የተሰበሩ ቃልኪዳኖች፦ በግጭት ወቅት የተከሰቱ ጾታዊ እና ወሲባዊ ጥቃቶች ከ”ተኩስ አቁም  ሰምምነት” በፊት እና በኋላ በኢትየጵያ ትግራይ ክልል ዉስጥ",
+                "year": "2023",
+                "type": "CRSV",
+                "region": "Tigray",
+                "summary": "ይህ ሪፖርት በሰሜን ኢትዮጵያ ትግራይ ክልል ዉስጥ የተካሄደዉ ጦርነት ተከትሎ በሰፊዉ የወሲብ ጥቃቶች መታየታቸውን ያሳያል። ",
+                "detail": "በህዳር 2015 ዓ/ም በኢትዮጵያ መንግስት እና በህወሀት መካከል ከተደረገዉ የጦርነት ማቋረጥ ስምምነት ከመደረጉ በፊትም ሆነ በኋላ ከግጭት ጋር የተያያዙ ጾታዊ እና ወሲባዊ ጥቃቶች የግጭቱ ዋና አካል እንደሆኑ የሚገልጹ ሪፖርቶች ታይተዋል። 1-3 በኢትዮጵያ ከሚገኙ የሰብአዊ መብት ተሟጋቾች እና የህብረተሰብ ጤና ባለሙያዎች እንዲሁም ሃኪሞች ለሰብአዊ መብቶች ከተባለ የበጎ አደራጎት ድርጅት በተውጣጣ ጥምር የምርምር ቡድን የተካሄደዉ ይህ ጥናት ግጭቱ ከጀመረበት ከህዳር ወር 2013 ዓ/ም አንስቶ ጭካኔ የተሞላባቸዉ እና መጠነ ሰፊ የሆኑ ወሲባዊ ጥቃቶች በተለያዩ ወታደራዊ ሃይሎች እንደፈተጸሙ የሚያሳይ ሲሆን ፣ በነዚህ ሃይሎች በትግራይ ክልል ዉስጥ የሚፈጸሙ ጾታዊ ጥቃቶች የተኩስ አቁም ስምምነቱ ከተፈረመ በኋላም አላማቋረጣቸዉን ያመለክታል። የሰብአዊ መብት ጥናትና ምርምር ቡድኑ በትግራይ ክልል ዉስጥ በሰላማዊ ዜጎች ላይ የተፈፀመውን የግጭት-ነክ ጾታዊ እና ወሲባዊ ጥቃት ዓይነቶችን እና መገለጫዎችን በጥቂቱ ለመመርመር እና ለመመዝገብ በማቀድ ባካሄደዉ በዚህ ጥናት ዉስጥ በክልሉ ከሚገኙ የተለያዩ የጤና ተቋማት ከህዳር 2013 ዓ/ም እስከ ሰኔ 2015 ዓ/ም ደረስ አገልግሎት ካገኙት የጥቃቱ ሰለባዎች የተሰበሰቡ የህክምና መዝገቦች ዉስጥ የተወሰኑትን ማለትም በቁጥር 305 የሚሆኑ መዝገቦችን በመገምገም እድሜያቸዉ ከ 8 አመት እስከ 69 አመት የሚሆኑ ሴቶች እና ህጻናት ላይ ከፍተኛ ቁጥር ያላቸዉ የወሲብ ጥቃቶች መፈጸማቸዉን አሳይቷል።",
+                "thumb": "assets/reports/broken-promises-amharic-thumbnail.png",
+                "pdf": "assets/reports/broken-promises-amharic.pdf",
+                "fileName": "broken-promises-amharic.pdf"
+          },
+        
+    ];
+
+    this._reports = allReports;
+    const filters = ['All', 'Investigation Report', 'Monitoring Report', 'CRSV'];
+    const reportFilters = filters.map((f) => ({
+      label: f,
+      select: () => this.setState({ reportFilter: f, reportsShown: 8, activeReportId: null, reportRequestStatus: '' }),
+      bg: this.state.reportFilter === f ? '#0B1D3A' : '#F2F6FB',
+      color: this.state.reportFilter === f ? '#FFFFFF' : '#0B1D3A',
+      border: this.state.reportFilter === f ? '#0B1D3A' : '#D6E4F2',
+    }));
+    const filteredReports = (this.state.reportFilter === 'All' ? allReports : allReports.filter((r) => r.type === this.state.reportFilter))
+      .slice()
+      .sort((a, b) => {
+        const pin = (r) => (r.id === 'stolen-broken-destroyed' ? 1 : 0);
+        return pin(b) - pin(a) || (parseInt(b.year, 10) || 0) - (parseInt(a.year, 10) || 0);
+      });
+    const releaseTs = Date.UTC(2026, 7, 18, 13, 0, 0); // 16:00 GMT+3 on release day, timezone-independent
+    const embargoFor = (r) => {
+      if (r.id !== 'stolen-broken-destroyed') {
+        return { showDownload: !r.restricted, showCountdown: false, countdownText: '' };
+      }
+      const remain = releaseTs - (this.state.now || Date.now());
+      if (remain <= 0) return { showDownload: true, showCountdown: false, countdownText: '' };
+      const s = Math.floor(remain / 1000);
+      const pad = (n) => String(n).padStart(2, '0');
+      const text = `${pad(Math.floor(s / 3600))}:${pad(Math.floor((s % 3600) / 60))}:${pad(s % 60)}`;
+      return { showDownload: false, showCountdown: true, countdownText: text };
+    };
+    const visibleReports = filteredReports.slice(0, this.state.reportsShown).map((r) => ({
+      ...r,
+      cardClass: r.id === 'stolen-broken-destroyed' ? 'report-card-featured' : '',
+      restricted: !!r.restricted,
+      downloadable: !r.restricted,
+      ...embargoFor(r),
+      open: () => this.openReport(r.id),
+    }));
+    const hasMoreReports = visibleReports.length < filteredReports.length;
+    const reportCountLabel = `Showing ${visibleReports.length} of ${filteredReports.length} publications`;
+    const activeReportRaw = allReports.find((r) => r.id === this.state.activeReportId) || allReports[0];
+    const activeReport = {
+      ...activeReportRaw,
+      restricted: !!activeReportRaw.restricted,
+      downloadable: !activeReportRaw.restricted,
+      ...embargoFor(activeReportRaw),
+    };
+
+    const storiesData = [
+      {
+        slotId: 'story-helen', title: 'Peace Cannot Be Built on Enforced Silence',
+        visibleText: 'The world celebrated when the Cessation of Hostilities Agreement was signed in November 2022. For the international community, the silence of the guns meant peace had finally arrived in Tigray. But for seventeen-year-old Helen* and her family outside Mekelle, the agreement did not bring safety. Months later, armed men entered Helen\u2019s home. Her mother walked her for miles to a local health facility, where a clinician documented her injuries \u2014 an act of quiet resistance that became one of the clinical records OJAH analyzed.\n\nHelen is now navigating a long road of recovery, in a village that remains tense and where transitional justice still feels far away. Her story is part of a striking pattern: ninety-five percent of the sexual violence cases involving minors recorded by medical human rights defenders in Tigray occurred after the peace agreement was signed.',
+        findings: [
+          { label: 'Widespread conflict-related sexual violence', text: 'OJAH and Physicians for Human Rights documented that sexual violence remained a systemic weapon used to terrorize civilian populations during military sweeps, with a high proportion of healthcare workers in Tigray reporting having treated survivors of CRSV.' },
+          { label: 'Systemic isolation and deprivation of care', text: 'Rolling States of Emergency, internet blackouts and regional blockades isolated communities from oversight, making it dangerous for survivors to travel for care and restricting clinics from receiving essential medical and psychological supplies.' },
+        ],
+        footnote: '*Name changed to protect the survivor\u2019s identity and safety.',
+      },
+      {
+        slotId: 'story-ruth', title: 'A Life Cut Short',
+        visibleText: 'Two-year-old Ruth* had never known her village in the Amhara region without the sound of drones overhead. On a quiet Sunday morning, a strike hit near her family\u2019s home while she played outside. Her parents ran toward the local clinic, two kilometers away \u2014 only to find it already destroyed by earlier shelling and raids, its supplies looted and its staff gone.\n\nWith no care available, Ruth did not survive. Today, a photograph in her parents\u2019 home is what remains of a life cut short in the very place built to protect it.',
+        findings: [
+          { label: 'Escalating strikes affecting civilians', text: 'OJAH\u2019s cross-regional monitoring documented a sharp escalation of strikes targeting civilian-dense centers across Amhara during the Fano insurgency, frequently affecting the most vulnerable, including young children.' },
+          { label: 'Collapse of healthcare infrastructure', text: 'Field research found that the destruction of health clinics followed a systemic pattern rather than incidental damage \u2014 clinics targeted, shelled, or stripped of resources, cutting off wounded civilians from emergency care.' },
+        ],
+        footnote: '*Name changed to protect the identity and dignity of the victim\u2019s family.',
+      },
+    ];
+    const stories = storiesData.map((st) => ({
+      ...st,
+      expanded: this.state.expandedStory === st.slotId,
+      toggleLabel: this.state.expandedStory === st.slotId ? 'Show less' : 'Read the evidence base',
+      toggle: () => this.setState((s) => ({ expandedStory: s.expandedStory === st.slotId ? null : st.slotId })),
+    }));
+
+    const navBg = this.state.scrolled ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.75)';
+    const navShadow = this.state.scrolled ? '0 1px 0 rgba(11,29,58,0.08)' : 'none';
+
+    return {
+      isHome: page === 'home', isAbout: page === 'about', isWhatWeDo: page === 'whatwedo',
+      isHowWeWork: page === 'howwework', isReports: page === 'reports',
+      isStories: page === 'stories', isContact: page === 'contact',
+      navBg, navShadow,
+      mobileNavOpen: this.state.mobileNavOpen, toggleMobileNav: this.toggleMobileNav,
+      linkStyle_home: this.navLink(page === 'home'), linkStyle_about: this.navLink(page === 'about'),
+      linkStyle_whatwedo: this.navLink(page === 'whatwedo'), linkStyle_howwework: this.navLink(page === 'howwework'),
+      linkStyle_reports: this.navLink(page === 'reports'),
+      linkStyle_stories: this.navLink(page === 'stories'),
+      linkStyle_contact: this.navLink(page === 'contact'),
+      goHome: () => this.go('home'), goAbout: () => this.go('about'), goWhatWeDo: () => this.go('whatwedo'),
+      goHowWeWork: () => this.go('howwework'), goReports: () => this.go('reports'),
+      goStories: () => this.go('stories'), goPartners: this.goHomePartners, goContact: () => this.go('contact'),
+      heroMouseMove: this.heroMouseMove, heroMouseLeave: this.heroMouseLeave,
+      closeLeader: this.closeModals, closeReport: this.closeModals, stopEvent: this.stopEvent,
+      loadMoreReports: this.loadMoreReports, submitReportRequest: this.submitReportRequest,
+      observeReveal: this.observeReveal,
+      values, leadership, programmeAreas, homeProgrammeTeaser, pipelineSteps, principles, partnerBenefitIcons,
+      reportFilters, filteredReports, visibleReports, hasMoreReports, reportCountLabel, stories,
+      hasActiveLeader: !!this.state.activeLeaderId, activeLeader,
+      hasActiveReport: !!this.state.activeReportId, activeReport,
+      reportRequestStatus: this.state.reportRequestStatus || '',
+      counts: { violations: 266, survivors: '3,100', reports: 22, submissions: 7 },
+    };
+  }
+}
+</script>
+
+</body></html>
